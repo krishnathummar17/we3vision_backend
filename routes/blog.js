@@ -206,12 +206,11 @@ router.post('/', protect, authorize('admin'), uploadSingle, handleUploadError, [
     } = req.body;
 
     // Handle featured image
-    const featuredImage = req.file
-  ? `https://test1.we3vision.com/uploads/${req.file.filename}`
-  : '';
+    const backendUrl = process.env.BACKEND_URL || "https://your-render-app.onrender.com";
 
-  
-  
+    const featuredImage = req.file
+      ? `${backendUrl}/uploads/${req.file.filename}`
+      : '';
 
     const blogData = {
       title,
@@ -317,8 +316,9 @@ router.put('/:id', protect, authorize('admin'), uploadSingle, handleUploadError,
     
     // Handle featured image
     if (req.file) {
-      updateData.featuredImage = `/uploads/${req.file.filename}`;
+      updateData.featuredImage = `${backendUrl}/uploads/${req.file.filename}`;
     }
+    
 
     // Parse arrays if they exist (already sanitized by validator)
     if (updateData.tags && !Array.isArray(updateData.tags)) {
