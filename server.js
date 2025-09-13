@@ -48,7 +48,7 @@ app.use(helmet({
 console.log('✅ Helmet middleware added');
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
-    ? ['https://yourdomain.com'] 
+    ? ["https://test1.we3vision.com"] 
     : ['http://localhost:3000'],
   credentials: true
 }));
