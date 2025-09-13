@@ -206,7 +206,11 @@ router.post('/', protect, authorize('admin'), uploadSingle, handleUploadError, [
     } = req.body;
 
     // Handle featured image
-    const featuredImage = req.file ? `/uploads/${req.file.filename}` : '';
+    const featuredImage = req.file 
+    ? `${req.protocol === 'http' ? 'https' : req.protocol}://${req.get('host')}/uploads/${req.file.filename}`
+    : '';
+  
+  
 
     const blogData = {
       title,
