@@ -43,7 +43,7 @@ console.log('Setting up CORS and security middleware...');
 
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://test1.we3vision.com"
+  "https://test.we3vision.com"
 ];
 
 app.use(cors({
