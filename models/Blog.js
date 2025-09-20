@@ -129,4 +129,11 @@ blogSchema.virtual('likeCount').get(function() {
 blogSchema.set('toJSON', { virtuals: true });
 blogSchema.set('toObject', { virtuals: true });
 
+// Add indexes for better query performance
+blogSchema.index({ status: 1, createdAt: -1 }); // For main blog listing
+blogSchema.index({ category: 1, status: 1, createdAt: -1 }); // For category filtering
+blogSchema.index({ author: 1, status: 1, createdAt: -1 }); // For author filtering
+blogSchema.index({ title: 'text', content: 'text', tags: 'text' }); // For search functionality
+blogSchema.index({ slug: 1 }); // For individual blog lookups
+
 module.exports = mongoose.model('Blog', blogSchema); 
