@@ -42,7 +42,7 @@ router.get('/', optionalAuth, async (req, res) => {
       .sort({ createdAt: -1 })
       .skip(skip)
       .limit(limit)
-      .select('-__v');
+      .select('-content -__v'); // Exclude full content for listing
 
     const total = await Blog.countDocuments(query);
     const totalPages = Math.ceil(total / limit);
