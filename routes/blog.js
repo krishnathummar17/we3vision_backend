@@ -206,7 +206,7 @@ router.post('/', protect, authorize('admin'), uploadSingle, handleUploadError, [
     } = req.body;
 
     // Handle featured image
-    const backendUrl = (process.env.BACKEND_URL || "https://we3vision-backend-1.onrender.com").replace(/\/api\/?$/, '');
+    const backendUrl = (process.env.BACKEND_URL || "https://we3vision-backend-1.onrender.com/api").replace(/\/api\/?$/, '');
 
     const featuredImage = req.file
       ? `${backendUrl}/uploads/${req.file.filename}`
