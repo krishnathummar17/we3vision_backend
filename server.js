@@ -44,8 +44,8 @@ console.log('Express app created');
 console.log('Setting up CORS and security middleware...');
 
 const allowedOrigins = [
-  "http://localhost:3000",
-  "https://www.we3vision.com"
+  'http://localhost:3000',         // for local dev
+  'https://www.we3vision.com'      // your production frontend
 ];
 
 app.use(cors({
@@ -80,6 +80,15 @@ const limiter = rateLimit({
 });
 app.use('/api/', limiter);
 console.log('✅ Rate limiting middleware added');
+// ----------------- AUTH ROUTE RATE LIMITER -----------------
+const authLimiter = rateLimit({
+  windowMs: 60 * 1000, // 1 minute
+  max: 10, // allow 10 requests per IP per minute
+  message: "Too many login attempts, please try again later.",
+});
+app.use("/api/auth", authLimiter);
+console.log("✅ Auth-specific rate limiter added");
+
 
 // ----------------- REQUEST LOGGING -----------------
 app.use((req, res, next) => {
