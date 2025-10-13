@@ -44,8 +44,9 @@ console.log('Express app created');
 console.log('Setting up CORS and security middleware...');
 
 const allowedOrigins = [
-  'http://localhost:3000',         // for local dev
-  'https://www.we3vision.com'      // your production frontend
+  'http://localhost:3000',
+  'https://we3vision.com',
+  'https://www.we3vision.com'     // your production frontend
 ];
 
 app.use(cors({
