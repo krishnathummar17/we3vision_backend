@@ -77,7 +77,8 @@ console.log('✅ Body parsing middleware added');
 // ----------------- RATE LIMITING -----------------
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 100
+  max: 100,
+  message: 'Too many requests, please try again later.'
 });
 app.use('/api/', limiter);
 console.log('✅ Rate limiting middleware added');
