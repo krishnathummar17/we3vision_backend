@@ -117,7 +117,12 @@ try {
 }
 
 const staticHeaders = (req, res, next) => {
+  // Allow images and other static files to be fetched cross-origin (for <img crossOrigin="anonymous">)
+  // This applies only to static mounts below, not to API routes protected by CORS allowlist.
   res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  // Optional: caching for static files (tune max-age as needed)
+  // res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
   next();
 };
 
